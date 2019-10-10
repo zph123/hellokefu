@@ -37,9 +37,3 @@ If using laravel valet, visit http://<project-name>.test
 Now you're ready to start coding!
 
 ## More
-
-The articles can help you to deploy it by yourself:
-
-- [Try Laravel 5.3 + Vue2 with Element](http://codesky.me/archives/try-laravel5-vue2-element-en.wind)
-- [Laravel 5.3 + Vue2 + Element试水](http://codesky.me/archives/try-laravel5-vue2-element-cn.wind)
-- [Element Docs](https://element.eleme.io/#/en-US)

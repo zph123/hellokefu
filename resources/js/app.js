@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -14,11 +13,14 @@ require('./bootstrap');
  */
 import App from './App.vue';
 import ElementUI from 'element-ui';
+import '../sass/reset.scss'
 import 'element-ui/lib/theme-chalk/index.css';
+import router from './router'
 
 Vue.use(ElementUI);
 
 const app = new Vue({
-  el: '#app',
-  render: h => h(App),
+    el: '#app',
+    router,
+    render: h => h(App),
 });
