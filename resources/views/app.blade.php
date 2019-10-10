@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Example</title>
+  <title>哈喽客服</title>
 </head>
 <body>
   <div id="app"></div>
