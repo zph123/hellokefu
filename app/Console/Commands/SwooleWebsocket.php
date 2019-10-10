@@ -38,7 +38,7 @@ class SwooleWebsocket extends Command
     public function handle()
     {
         //
-        $server = new \swoole_websocket_server("127.0.0.1", 9502);
+        $server = new \swoole_websocket_server("0.0.0.0", 9510);
 
         $server->on('open', function($server, $req) {
             echo "connection open: {$req->fd}\n";
