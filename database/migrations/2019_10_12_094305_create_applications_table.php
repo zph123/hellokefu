@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApplicationTable extends Migration
+class CreateApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateApplicationTable extends Migration
      */
     public function up()
     {
-        Schema::create('application', function (Blueprint $table) {
-            $table->string('aid')->unique()->comment('应用标识');
-            $table->integer('seat_num')->comment('坐席数');
+        Schema::create('hello_applications', function (Blueprint $table) {
+            $table->string('app_uuid')->unique()->comment('应用编号 系统生成');
+            $table->string('welcome_message')->comment('欢迎消息');
+            $table->string('end_message')->comment('结束消息');
             $table->increments('id');
+            $table->index('app_uuid');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateApplicationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('application');
+        Schema::dropIfExists('hello_applications');
     }
 }
