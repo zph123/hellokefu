@@ -1,6 +1,6 @@
 # 哈啰客服
 
-<p align="center"><img src="https://github.com/zph123/hellokefu/tree/master/public/logo.png" width="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/zph123/hellokefu/master/public/logo.png" width="400"></p>
 
 ## Usage
 ```
