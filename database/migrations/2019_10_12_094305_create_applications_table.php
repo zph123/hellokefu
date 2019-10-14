@@ -13,7 +13,7 @@ class CreateApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hello_applications', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->string('app_uuid')->unique()->comment('应用编号 系统生成');
             $table->string('welcome_message')->comment('欢迎消息');
             $table->string('end_message')->comment('结束消息');
@@ -30,6 +30,6 @@ class CreateApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hello_applications');
+        Schema::dropIfExists('applications');
     }
 }
