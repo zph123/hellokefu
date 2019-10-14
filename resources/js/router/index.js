@@ -20,7 +20,7 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        redirect: {name: 'chat'},
+        redirect: {name: 'conversation'},
         component: Layout,
         children: [{
             path: 'panel',
