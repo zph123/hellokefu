@@ -13,7 +13,7 @@ class CreateVisitorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hello_visitors', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('visitor_id',128)->unique()->nullable(false)->comment('访客编号 系统生成');
             $table->integer('user_id',false,true)->nullable(false)->comment('客服');
@@ -50,6 +50,6 @@ class CreateVisitorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hello_visitors');
+        Schema::dropIfExists('visitors');
     }
 }
