@@ -5,7 +5,6 @@ import { getToken } from './auth'
 const instance = axios.create({
     baseURL: 'http://dev.hellokefu.com/api/',
     timeout: 3000,
-    headers: {'X-Custom-Header': 'foobar'}
 });
 
 // Add a request interceptor

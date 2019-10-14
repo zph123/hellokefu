@@ -16,6 +16,7 @@ const routes = [
         path: '/chat',
         name: 'Chat',
         component: Chat,
+        meta: { title: '咨询', icon: '' }
     },
     {
         path: '/',
@@ -25,16 +26,19 @@ const routes = [
         children: [{
             path: 'panel',
             name: 'panel',
+            meta: { title: '面板', icon: '' },
             // component: () => import('../pages/home/Home.vue')
             component: Vue.component('panel', require('../pages/home/home.vue').default),
         },{
             path: 'conversation',
             name: 'conversation',
+            meta: { title: '会话', icon: '' },
             component: Vue.component('conversation', require('../pages/conversation/conversation.vue').default),
         },{
 
             path: 'visit',
             name: 'visit',
+            meta: { title: '访客', icon: '' },
             component: Vue.component('visit', require('../pages/visit/index.vue').default),
 
         }]

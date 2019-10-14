@@ -107,7 +107,9 @@
                         login(this.loginForm).then(response => {
                             const { data } = response
                             setToken(data.token)
-                            this.$store.commit('setToken', data.token);
+                            alert(data.token)
+                            this.$store.commit('SET_TOKEN', data.token);
+                            alert('xxx');
                             this.$router.push({ path: this.redirect || '/' })
                             this.loading = false
                         }).catch(error => {

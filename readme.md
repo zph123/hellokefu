@@ -1,10 +1,10 @@
-# Element In Laravel
+# 哈啰客服
 
-Laravel 5.7 Project with Vue2 and [Element](https://github.com/ElemeFE/element)
+<p align="center"><img src="https://github.com/zph123/hellokefu/tree/master/public/logo.png" width="400"></p>
 
 ## Usage
 ```
-git clone https://github.com/ElementUI/element-in-laravel-starter.git <project-name>
+git clone https://github.com/zph123/hellokefu <project-name>
 ```
 ```
 cd <project-name>
@@ -17,6 +17,12 @@ cp .env.example .env
 ```
 ```
 php artisan key:generate
+```
+```
+php artisan jwt:secret
+```
+```
+php artisan migrate --seed
 ```
 ```
 php artisan serve (if not using laravel valet)
