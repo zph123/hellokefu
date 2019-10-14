@@ -20,13 +20,13 @@
                     <el-menu-item index="2-2">选项2</el-menu-item>
                     <el-menu-item index="2-3">选项3</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3" route="chat">
+                <el-menu-item index="3" route="conversation">
                     <i class="el-icon-menu"></i>
                     <span slot="title">会话</span>
                 </el-menu-item>
-                <el-menu-item index="4">
+                <el-menu-item index="4" route="visit">
                     <i class="el-icon-setting"></i>
-                    <span slot="title">留言</span>
+                    <span slot="title">访客</span>
                 </el-menu-item>
                 <el-menu-item index="5" route="set">
                     <i class="el-icon-setting"></i>

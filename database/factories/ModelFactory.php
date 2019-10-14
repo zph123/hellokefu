@@ -15,7 +15,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name'      => 'admin',  // $faker->name,
+        'name'      => $faker->name,
         'email'     => $faker->unique()->safeEmail,
         'mobile'    => $faker->phoneNumber,
         'avatar'    => $faker->imageUrl(),

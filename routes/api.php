@@ -31,10 +31,10 @@ Route::group([
 ],function (){
 
     // Auth
-    Route::delete('logout', 'Backend\AuthController@logout');
-    Route::get('profile', 'Backend\AuthController@profile');
+    Route::delete('logout', 'Api\AuthController@logout');
+    Route::get('profile', 'Api\AuthController@profile');
 
     // Admin
-    Route::apiResource('admin','Backend\AdminController');
+    Route::apiResource('admin','Api\AdminController');
 
 });
