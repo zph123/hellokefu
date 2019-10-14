@@ -4,18 +4,27 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-    name: ""
+    token: null,
+    name: "",
+    avatar: ""
 };
 
 const getters = {   // 实时监听state值的变化(最新状态)
     isLogined() {
-        return state.name !== "";
+        return state.token !== null;
     },
+    token() {
+        return state.token;
+    },
+    // avatar: state => state.user.avatar,
 };
 
 const mutations = {
-    setUsername(state, username) {
-        state.name = username;
+    setToken(state, token) {
+        state.token = token;
+    },
+    setName(state, name) {
+        state.name = name;
     }
 };
 

@@ -10,8 +10,12 @@ class ApiController extends Controller
 {
     use ResultTrait;
 
+    protected $user;
+
     public function __construct()
     {
+        $this->user = auth('api')->user();
+
         #$this->middleware('jwt.auth', ['except' => 'login']);
     }
 }

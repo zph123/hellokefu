@@ -6,15 +6,15 @@
                 <h3 class="title">管理员登录</h3>
             </div>
 
-            <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
+            <el-form-item prop="email">
+            <span class="svg-container">
+              <svg-icon icon-class="user" />
+            </span>
             <el-input
-                    ref="username"
-                    v-model="loginForm.username"
-                    placeholder="Username"
-                    name="username"
+                    ref="email"
+                    v-model="loginForm.email"
+                    placeholder="Email"
+                    name="email"
                     type="text"
                     tabindex="1"
                     auto-complete="on"
@@ -22,9 +22,9 @@
             </el-form-item>
 
             <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
+                <span class="svg-container">
+                  <svg-icon icon-class="password" />
+                </span>
                 <el-input
                         :key="passwordType"
                         ref="password"
@@ -40,27 +40,22 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
             </el-form-item>
-
             <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-            <div class="tips">
-                <span style="margin-right:20px;">username: admin</span>
-                <span> password: secret</span>
-            </div>
-
         </el-form>
     </div>
 </template>
 
 <script>
-    import { validUsername } from '../../utils/validate'
+    import { checkEmail } from '../../utils/validate'
+    import { login } from '../../api/auth'
+    import { setToken } from '../../utils/auth'
 
     export default {
         name: 'Login',
         data() {
-            const validateUsername = (rule, value, callback) => {
-                if (!validUsername(value)) {
-                    callback(new Error('Please enter the correct user name'))
+            const validateEmail = (rule, value, callback) => {
+                if (!checkEmail(value)) {
+                    callback(new Error('Please enter the correct email'))
                 } else {
                     callback()
                 }
@@ -74,11 +69,11 @@
             }
             return {
                 loginForm: {
-                    username: 'admin',
-                    password: '111111'
+                    email: '',
+                    password: ''
                 },
                 loginRules: {
-                    username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+                    email: [{ required: true, trigger: 'blur', validator: validateEmail }],
                     password: [{ required: true, trigger: 'blur', validator: validatePassword }]
                 },
                 loading: false,
@@ -109,11 +104,16 @@
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         this.loading = true
-                        this.$store.dispatch('user/login', this.loginForm).then(() => {
+                        login(this.loginForm).then(response => {
+                            const { data } = response
+                            setToken(data.token)
+                            this.$store.commit('setToken', data.token);
                             this.$router.push({ path: this.redirect || '/' })
                             this.loading = false
-                        }).catch(() => {
+                        }).catch(error => {
                             this.loading = false
+                            console.log('error submit!!')
+                            return false
                         })
                     } else {
                         console.log('error submit!!')
@@ -127,8 +127,6 @@
 
 <style lang="scss">
     /* 修复input 背景不协调 和光标变色 */
-    /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
     $bg:#283443;
     $light_gray:#606266;
     $cursor: #000;
@@ -193,18 +191,6 @@
             overflow: hidden;
             -webkit-box-shadow: 0 0 60px #ddd;
             box-shadow: 0 0 60px #ddd;
-        }
-
-        .tips {
-            font-size: 14px;
-            color: #fff;
-            margin-bottom: 10px;
-
-            span {
-                &:first-of-type {
-                    margin-right: 16px;
-                }
-            }
         }
 
         .svg-container {
