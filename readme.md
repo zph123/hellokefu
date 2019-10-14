@@ -1,6 +1,7 @@
-# 哈啰客服
 
-<p align="center"><img src="https://raw.githubusercontent.com/zph123/hellokefu/master/public/logo.png" height="200" width="200"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/zph123/hellokefu/master/public/logo.png" height="150" width="150"></p>
+
+# Hello chat
 
 ## Usage
 ```
