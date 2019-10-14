@@ -24,9 +24,9 @@
                     <i class="el-icon-menu"></i>
                     <span slot="title">会话</span>
                 </el-menu-item>
-                <el-menu-item index="4">
+                <el-menu-item index="4" route="visit">
                     <i class="el-icon-setting"></i>
-                    <span slot="title">留言</span>
+                    <span slot="title">访客</span>
                 </el-menu-item>
                 <el-menu-item index="5" route="set">
                     <i class="el-icon-setting"></i>

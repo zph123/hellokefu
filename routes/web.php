@@ -14,7 +14,3 @@
 Route::get('/', function () {
     return view('app');
 });
-
-
-// API
-Route::get('/chat','ChatController@index');

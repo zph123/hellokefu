@@ -9,4 +9,9 @@ use App\Http\Controllers\Controller;
 class ApiController extends Controller
 {
     use ResultTrait;
+
+    public function __construct()
+    {
+        #$this->middleware('jwt.auth', ['except' => 'login']);
+    }
 }
