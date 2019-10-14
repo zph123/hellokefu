@@ -16,3 +16,25 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+
+// Login
+Route::post('login', 'Api\AuthController@login')->name('admin.login');
+
+
+// 需要登录的路由组
+Route::group([
+    'middleware'    => [
+        'jwt.auth',
+    ]
+
+],function (){
+
+    // Auth
+    Route::delete('logout', 'Backend\AuthController@logout');
+    Route::get('profile', 'Backend\AuthController@profile');
+
+    // Admin
+    Route::apiResource('admin','Backend\AdminController');
+
+});

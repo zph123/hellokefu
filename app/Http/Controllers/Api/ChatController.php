@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
-class ChatController extends Controller
+class ChatController extends ApiController
 {
 
     public function index()
