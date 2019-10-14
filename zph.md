@@ -87,4 +87,8 @@
   cd hellokefu/
   php artisan swoole:websocket
   ```
+- 启动js代码监听
+  ```
+  npm run watch
+  ```
 
