@@ -19,7 +19,7 @@
         props: {
             isActive: {
                 type: Boolean,
-                default: false
+                default: true
             }
         },
         methods: {

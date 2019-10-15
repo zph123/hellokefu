@@ -9,24 +9,8 @@
             <app-main />
         </div>
     </div>
-
-    <!--<div class="main-app">-->
-        <!--<el-container>-->
-            <!--<el-header>-->
-                <!--<Header></Header>-->
-            <!--</el-header>-->
-            <!--<el-container>-->
-                <!--<Aside></Aside>-->
-                <!--<el-main>-->
-                    <!--<router-view/>-->
-                <!--</el-main>-->
-            <!--</el-container>-->
-        <!--</el-container>-->
-    <!--</div>-->
 </template>
 <script>
-//    import Header from './components/Header.vue'
-//    import Aside from './components/Aside.vue'
     import { Navbar, Sidebar, AppMain } from './components'
 
     export default {
@@ -37,23 +21,18 @@
             }
         },
         components: {
-//            Header,
-//            Aside
             Navbar,
             Sidebar,
             AppMain
         },
         methods: {
             handleClickOutside() {
-                this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
             }
         }
     };
 </script>
 
 <style lang="scss" scoped>
-    @import "../../sass/mixin.scss";
-    @import "../../sass/_variables.scss";
 
     .app-wrapper {
         position: relative;
