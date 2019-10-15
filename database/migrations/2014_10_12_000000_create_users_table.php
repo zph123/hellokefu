@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('app_id',false,true)->nullable(false)->comment('应用主键ID');
             $table->string('name',60)->comment('姓名');
             $table->string('email',60)->unique()->comment('邮箱');
             $table->string('mobile',30)->unique()->comment('手机号');
@@ -24,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->index('app_id');
         });
     }
 
