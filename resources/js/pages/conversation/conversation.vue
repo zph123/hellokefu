@@ -1,13 +1,17 @@
 <template>
     <div>
-        <h2>conversation</h2>
-        <input type="text" v-model="message">
-        <button v-on:click="send">发送1</button>
-        <ul>
-            <li v-for="site in sites">
-                {{ site.name }}
-            </li>
-        </ul>
+        <el-card class="box-card">
+            <h2>conversation</h2>
+            <input type="text" v-model="message">
+            <button v-on:click="send">发送1</button>
+            <ul>
+                <li v-for="site in sites">
+                    {{ site.name }}
+                </li>
+            </ul>
+           
+        </el-card>
+
     </div>
 </template>
 

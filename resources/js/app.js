@@ -17,7 +17,8 @@ import '../sass/reset.scss'
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
 import store from './store';
-import permission from './utils/permission'
+import './utils/permission' // Auth
+import '../sass/index.scss' // global css
 
 Vue.use(ElementUI);
 

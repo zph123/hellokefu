@@ -1,21 +1,33 @@
 <template>
-    <div class="main-app">
-        <el-container>
-            <el-header>
-                <Header></Header>
-            </el-header>
-            <el-container>
-                <Aside></Aside>
-                <el-main>
-                    <router-view/>
-                </el-main>
-            </el-container>
-        </el-container>
+    <div class="app-wrapper openSidebar">
+        <div class="drawer-bg" @click="handleClickOutside" />
+        <sidebar class="sidebar-container" />
+        <div class="main-container">
+            <div>
+                <navbar />
+            </div>
+            <app-main />
+        </div>
     </div>
+
+    <!--<div class="main-app">-->
+        <!--<el-container>-->
+            <!--<el-header>-->
+                <!--<Header></Header>-->
+            <!--</el-header>-->
+            <!--<el-container>-->
+                <!--<Aside></Aside>-->
+                <!--<el-main>-->
+                    <!--<router-view/>-->
+                <!--</el-main>-->
+            <!--</el-container>-->
+        <!--</el-container>-->
+    <!--</div>-->
 </template>
 <script>
-    import Header from './components/Header.vue'
-    import Aside from './components/Aside.vue'
+//    import Header from './components/Header.vue'
+//    import Aside from './components/Aside.vue'
+    import { Navbar, Sidebar, AppMain } from './components'
 
     export default {
         name: 'Layout',
@@ -25,51 +37,57 @@
             }
         },
         components: {
-            Header,
-            Aside
+//            Header,
+//            Aside
+            Navbar,
+            Sidebar,
+            AppMain
+        },
+        methods: {
+            handleClickOutside() {
+                this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+            }
         }
     };
 </script>
-<style scoped>
-    /* Add scoped styles */
 
-    .main-app{
-        background-color: #EFF3F8;
+<style lang="scss" scoped>
+    @import "../../sass/mixin.scss";
+    @import "../../sass/_variables.scss";
+
+    .app-wrapper {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        &.mobile.openSidebar{
+            position: fixed;
+            top: 0;
+        }
+    }
+    .drawer-bg {
+        /*background: #000;*/
+        opacity: 0.3;
+        width: 100%;
+        top: 0;
+        height: 100%;
+        position: absolute;
+        z-index: 999;
     }
 
-    .el-header, .el-footer {
-        background-color: #B3C0D1;
-        /*color: #333;*/
-        /*text-align: center;*/
-        /*line-height: 60px;*/
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 9;
+        width: calc(100% - 210px);
+        transition: width 0.28s;
     }
 
-    .el-aside {
-        /*background-color: #D3DCE6;*/
-        /*color: #333;*/
-        /*text-align: center;*/
-        /*line-height: 200px;*/
-        /*height: 100%;*/
+    .hideSidebar .fixed-header {
+        width: calc(100% - 54px)
     }
 
-    .el-main {
-
-        /*color: #333;*/
-        /*text-align: center;*/
-        /*height: 100%;*/
-        /*line-height: 160px;*/
+    .mobile .fixed-header {
+        width: 100%;
     }
-
-    body > .el-container {
-        /*margin-bottom: 40px;*/
-    }
-
-    /*.el-container:nth-child(5) .el-aside,*/
-    /*.el-container:nth-child(6) .el-aside {*/
-    /*line-height: 260px;*/
-    /*}*/
-
-    /*.el-container:nth-child(7) .el-aside {*/
-    /*line-height: 320px;*/
-    /*}*/
 </style>
