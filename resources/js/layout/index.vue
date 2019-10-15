@@ -1,6 +1,6 @@
 <template>
     <div class="app-wrapper openSidebar">
-        <div class="drawer-bg" @click="handleClickOutside" />
+        <div @click="handleClickOutside" />
         <sidebar class="sidebar-container" />
         <div class="main-container">
             <div>

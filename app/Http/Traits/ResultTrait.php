@@ -49,10 +49,14 @@ trait ResultTrait
      */
     protected function result(JsonResource $data = null, string $message = 'ok', int $status = 200): JsonResponse
     {
+        dump($data);die;
         $ret['message'] = $message;
         #$ret['status'] = $status;
         if (isset($data)) {
             $ret['data'] = $data;
+        }
+        if (isset($data['meta'])){
+            $ret['meta'] = $data['meta'];
         }
         return response()->json($ret, $status);
     }

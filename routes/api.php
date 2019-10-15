@@ -37,4 +37,6 @@ Route::group([
     // Admin
     Route::apiResource('admin','Api\AdminController');
 
+    // Visitor
+    Route::apiResource('visitor','Api\VisitorController');
 });
