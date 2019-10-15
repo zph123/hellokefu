@@ -1,6 +1,6 @@
 <template>
-    <div style="height:600px;">
-        <el-aside width="200px" class="main-sidebar">
+    <div :class="{'has-logo':false}">
+        <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
                     default-active="2"
                     :router="true"
@@ -29,11 +29,15 @@
                     <span slot="title">设置</span>
                 </el-menu-item>
             </el-menu>
-        </el-aside>
+
+        </el-scrollbar>
     </div>
 </template>
 
+
 <script>
+    import variables from '../../../sass/_variables.scss'
+
     export default {
         components: {},
         methods: {
@@ -49,5 +53,3 @@
         }
     }
 </script>
-<style scoped>
-</style>

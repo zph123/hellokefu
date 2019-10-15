@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h2>conversation</h2>
+        <el-card class="box-card">
+            <h2>conversation</h2>
+        </el-card>
+
     </div>
 </template>
 
