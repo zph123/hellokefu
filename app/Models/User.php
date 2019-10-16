@@ -11,6 +11,16 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     /**
+     * 客服管理员
+     */
+    const ROLE_ADMIN = 1;
+
+    /**
+     * 客服
+     */
+    const ROLE_CHAT = 0;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

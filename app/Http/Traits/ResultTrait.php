@@ -49,7 +49,11 @@ trait ResultTrait
      */
     protected function result($data = null, string $message = 'ok', int $status = 200)
     {
+        if (is_null($data)) {
+            return response()->json(compact('status', 'message'), $status);
+        } else {
+            // to-do
 
-        return response()->json($data, $status);
+        }
     }
 }

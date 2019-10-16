@@ -31,3 +31,17 @@ export function logout() {
         method: 'delete'
     })
 }
+
+
+/**
+ * 客服注册
+ * @param data
+ * @returns {*}
+ */
+export function register(data) {
+    return request({
+        url: '/register',
+        method: 'post',
+        data
+    })
+}

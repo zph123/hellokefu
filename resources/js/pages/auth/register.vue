@@ -3,22 +3,22 @@
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
             <div class="title-container">
-                <h3 class="title">管理员登录</h3>
+                <h3 class="title">注册</h3>
             </div>
 
             <el-form-item prop="email">
             <span class="svg-container">
               <svg-icon icon-class="user" />
             </span>
-            <el-input
-                    ref="email"
-                    v-model="loginForm.email"
-                    placeholder="Email"
-                    name="email"
-                    type="text"
-                    tabindex="1"
-                    auto-complete="on"
-            />
+                <el-input
+                        ref="email"
+                        v-model="loginForm.email"
+                        placeholder="Email"
+                        name="email"
+                        type="text"
+                        tabindex="1"
+                        auto-complete="on"
+                />
             </el-form-item>
 
             <el-form-item prop="password">
@@ -37,18 +37,21 @@
                         @keyup.enter.native="handleLogin"
                 />
                 <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
+                    <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+                </span>
             </el-form-item>
-            <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+            <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">确认注册</el-button>
+
+            <div class="tips">
+                <span><a href="/#/login">去登录</a></span>
+            </div>
         </el-form>
     </div>
 </template>
 
 <script>
     import { checkEmail } from '../../utils/validate'
-    import { login } from '../../api/auth'
-    import { setToken } from '../../utils/auth'
+    import { register } from '../../api/auth'
 
     export default {
         name: 'Login',
@@ -70,11 +73,11 @@
             return {
                 loginForm: {
                     email: '',
-                    password: ''
+                    password: '',
                 },
                 loginRules: {
                     email: [{ required: true, trigger: 'blur', validator: validateEmail }],
-                    password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+                    password: [{ required: true, trigger: 'blur', validator: validatePassword }],
                 },
                 loading: false,
                 passwordType: 'password',
@@ -104,11 +107,10 @@
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         this.loading = true
-                        login(this.loginForm).then(response => {
-                            const { token } = response
-                            setToken(token)
-                            this.$store.commit('SET_TOKEN', token);
-                            this.$router.push({ path: this.redirect || '/' })
+                        register(this.loginForm).then(response => {
+                            console.log(response)
+
+                            this.$router.push({ path: '/login' })
                             this.loading = false
                         }).catch(error => {
                             this.loading = false
@@ -192,7 +194,16 @@
             -webkit-box-shadow: 0 0 60px #ddd;
             box-shadow: 0 0 60px #ddd;
         }
-
+        .tips {
+            font-size: 14px;
+            color: #409EFF;
+            margin-bottom: 10px;
+            span {
+                &:first-of-type {
+                    margin-right: 16px;
+                }
+            }
+        }
         .svg-container {
             padding: 6px 5px 6px 15px;
             color: $dark_gray;
