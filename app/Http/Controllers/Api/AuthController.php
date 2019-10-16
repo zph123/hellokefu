@@ -75,11 +75,11 @@ class AuthController extends ApiController
                 $app->save();
 
                 $user = new User();
-                $user->app_id = $app->getIncrementing();
-                $user->name = '管理员';
-                $user->email = $request->email;
+                $user->app_id   = $app->id;
+                $user->name     = '管理员';
+                $user->email    = $request->email;
                 $user->password = bcrypt($request->password);
-                $user->role = User::ROLE_ADMIN;
+                $user->role     = User::ROLE_ADMIN;
                 $user->save();
 
             },3);
