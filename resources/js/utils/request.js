@@ -30,7 +30,7 @@ instance.interceptors.response.use(response => {
     return data;
 }, error => {
     console.error('error','----response----')
-    const { message,status } = error.response.data
+    const { message,status_code } = error.response.data
     // Do something with response error
     Message({
         message: message,
@@ -38,7 +38,7 @@ instance.interceptors.response.use(response => {
         duration: 5 * 1000
     })
 
-    if (status === '401'){
+    if (status_code === 401){
         destroyToken()
         router.push({ name: 'Login'})
     }

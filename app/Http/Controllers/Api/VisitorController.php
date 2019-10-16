@@ -10,12 +10,11 @@ class VisitorController extends ApiController
 {
     /**
      * 访客列表
-     *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return VisitorResource::collection(Visitor::orderBy('id',SORT_DESC)->paginate($this->perPage));
+        return $this->success(VisitorResource::collection(Visitor::orderBy('id',SORT_DESC)->paginate($this->perPage)));
     }
 
     /**
@@ -30,14 +29,13 @@ class VisitorController extends ApiController
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Visitor $visitor
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Visitor $visitor)
     {
-        return new VisitorResource($visitor);
+        return $this->success(new VisitorResource($visitor));
     }
 
     /**
