@@ -1,6 +1,8 @@
 import axios from 'axios'
 import store from '../store'
-import { getToken } from './auth'
+import router from '../router'
+import { getToken, destroyToken } from './auth'
+import { MessageBox, Message } from 'element-ui'
 
 const instance = axios.create({
     baseURL: 'http://dev.hellokefu.com/api/',
@@ -21,10 +23,19 @@ instance.interceptors.request.use(config => {
 
 // Add a response interceptor
 instance.interceptors.response.use(response => {
-    // Do something with response data
-    return response;
+
+    const data = response.data
+    console.log('response',response)
+    return data;
 }, error => {
     // Do something with response error
+    Message({
+        message: error.message,
+        type: 'error',
+        duration: 5 * 1000
+    })
+    destroyToken()
+    router.push({ name: 'Login'})
     return Promise.reject(error);
 });
 

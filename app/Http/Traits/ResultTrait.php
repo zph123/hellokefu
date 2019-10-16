@@ -22,7 +22,7 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    public function success(JsonResource $data = null, int $status = 200): JsonResponse
+    public function success($data = null, int $status = 200)
     {
         return $this->result($data, 'success', $status);
     }
@@ -34,7 +34,7 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    public function error(string $message = '', int $status = 500): JsonResponse
+    public function error(string $message = '', int $status = 500)
     {
         return $this->result(null, $message, $status);
     }
@@ -47,17 +47,9 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    protected function result(JsonResource $data = null, string $message = 'ok', int $status = 200): JsonResponse
+    protected function result($data = null, string $message = 'ok', int $status = 200)
     {
-        dump($data);die;
-        $ret['message'] = $message;
-        #$ret['status'] = $status;
-        if (isset($data)) {
-            $ret['data'] = $data;
-        }
-        if (isset($data['meta'])){
-            $ret['meta'] = $data['meta'];
-        }
-        return response()->json($ret, $status);
+
+        return response()->json($data, $status);
     }
 }

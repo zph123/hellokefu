@@ -105,16 +105,14 @@
                     if (valid) {
                         this.loading = true
                         login(this.loginForm).then(response => {
-                            const { data } = response
-                            setToken(data.token)
-                            alert(data.token)
-                            this.$store.commit('SET_TOKEN', data.token);
-                            alert('xxx');
+                            const { token } = response
+                            setToken(token)
+                            this.$store.commit('SET_TOKEN', token);
                             this.$router.push({ path: this.redirect || '/' })
                             this.loading = false
                         }).catch(error => {
                             this.loading = false
-                            console.log('error submit!!')
+                            console.log('error submit!!',error)
                             return false
                         })
                     } else {

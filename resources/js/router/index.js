@@ -11,6 +11,7 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
+        meta: { title: '登录', icon: '' }
     },
     {
         path: '/chat',
