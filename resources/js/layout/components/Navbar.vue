@@ -4,10 +4,36 @@
 
         <breadcrumb class="breadcrumb-container" />
 
+        <div class="right-menu">
+            <el-dropdown class="avatar-container" trigger="click">
+                <div class="avatar-wrapper">
+                    <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" class="user-avatar">
+                    <i class="el-icon-caret-bottom" />
+                </div>
+                <el-dropdown-menu slot="dropdown" class="user-dropdown">
+                    <router-link to="/">
+                        <el-dropdown-item>
+                            Home
+                        </el-dropdown-item>
+                    </router-link>
+                    <a target="_blank" href="https://github.com/zph123/hellokefu">
+                        <el-dropdown-item>Github</el-dropdown-item>
+                    </a>
+                    <a target="_blank" href="#">
+                        <el-dropdown-item>Docs</el-dropdown-item>
+                    </a>
+                    <el-dropdown-item divided>
+                        <span style="display:block;" @click="logout">退出</span>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
     </div>
 </template>
 
 <script>
+    import { logout } from '../../api/auth'
+    import { destroyToken } from '../../utils/auth'
     import Breadcrumb from './Breadcrumb'
     import Hamburger from './Hamburger'
     export default {
@@ -19,11 +45,16 @@
         },
         methods: {
             toggleSideBar() {
-                this.$store.dispatch('app/toggleSideBar')
+                console.log('toggle side bar')
             },
-            async logout() {
-                await this.$store.dispatch('user/logout')
-                this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+            logout() {
+                logout().then(() => {
+                    this.$store.commit('SET_TOKEN', null)
+                    destroyToken()
+                    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+                }).catch(error => {
+                    console.log('error',error)
+                })
             }
         }
     }

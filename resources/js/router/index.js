@@ -42,6 +42,13 @@ const routes = [
             meta: { title: '访客', icon: '' },
             component: Vue.component('visit', require('../pages/visit/index.vue').default),
 
+        },{
+
+            path: 'set',
+            name: 'set',
+            meta: { title: '设置', icon: '' },
+            component: Vue.component('set', require('../pages/set/index.vue').default),
+
         }]
     },
     {

@@ -28,6 +28,6 @@ export function profile() {
 export function logout() {
     return request({
         url: '/logout',
-        method: 'post'
+        method: 'delete'
     })
 }
