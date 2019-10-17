@@ -5,7 +5,7 @@ import { getToken, destroyToken } from './auth'
 import { Message } from 'element-ui'
 
 const instance = axios.create({
-    baseURL: 'http://dev.hellokefu.com/api/',
+    baseURL: window.location.protocol+"//"+window.location.host+"/api",
     timeout: 3000,
 });
 
