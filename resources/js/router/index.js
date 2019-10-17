@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Chat from '../pages/chat/chat.vue'
 import Layout from '../layout/index.vue'
-import Login from '../pages/login/index.vue'
+import Login from '../pages/auth/login.vue'
+import Register from '../pages/auth/register.vue'
 
 Vue.use(VueRouter);
 
@@ -11,6 +12,13 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
+        meta: { title: '登录', icon: '' }
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register,
+        meta: { title: '注册', icon: '' }
     },
     {
         path: '/chat',
@@ -40,6 +48,13 @@ const routes = [
             name: 'visit',
             meta: { title: '访客', icon: '' },
             component: Vue.component('visit', require('../pages/visit/index.vue').default),
+
+        },{
+
+            path: 'set',
+            name: 'set',
+            meta: { title: '设置', icon: '' },
+            component: Vue.component('set', require('../pages/set/index.vue').default),
 
         }]
     },

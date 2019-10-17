@@ -16,8 +16,8 @@ class CreateApplicationsTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('app_uuid')->unique()->comment('应用编号 系统生成');
-            $table->string('welcome_message')->comment('欢迎消息');
-            $table->string('end_message')->comment('结束消息');
+            $table->string('welcome_message')->default('')->comment('欢迎消息');
+            $table->string('end_message')->default('')->comment('结束消息');
             $table->index('app_uuid');
             $table->timestamps();
         });

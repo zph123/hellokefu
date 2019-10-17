@@ -20,6 +20,8 @@ Route::get('/user', function (Request $request) {
 
 // Login
 Route::post('login', 'Api\AuthController@login')->name('admin.login');
+// Register
+Route::post('register', 'Api\AuthController@register')->name('admin.register');
 
 
 // 需要登录的路由组

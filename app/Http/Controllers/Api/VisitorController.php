@@ -9,13 +9,12 @@ use Illuminate\Http\Request;
 class VisitorController extends ApiController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 访客列表
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return VisitorResource::collection(Visitor::paginate(15));
+        return $this->success(VisitorResource::collection(Visitor::orderBy('id',SORT_DESC)->paginate($this->perPage)));
     }
 
     /**
@@ -30,14 +29,13 @@ class VisitorController extends ApiController
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Visitor $visitor
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(Visitor $visitor)
     {
-        //
+        return $this->success(new VisitorResource($visitor));
     }
 
     /**

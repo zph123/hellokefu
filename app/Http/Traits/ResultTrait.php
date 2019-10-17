@@ -11,6 +11,7 @@ namespace App\Http\Traits;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 trait ResultTrait
 {
@@ -22,9 +23,9 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    public function success(JsonResource $data = null, int $status = 200): JsonResponse
+    public function success(JsonResource $data = null, int $status_code = 200): JsonResponse
     {
-        return $this->result($data, 'success', $status);
+        return $this->result($data, 'success', $status_code);
     }
 
     /**
@@ -34,9 +35,9 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    public function error(string $message = '', int $status = 500): JsonResponse
+    public function error(string $message = '', int $status_code = 500): JsonResponse
     {
-        return $this->result(null, $message, $status);
+        return $this->result(null, $message, $status_code);
     }
 
     /**
@@ -47,17 +48,22 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    protected function result(JsonResource $data = null, string $message = 'ok', int $status = 200): JsonResponse
+    protected function result(JsonResource $data = null, string $message = 'ok', int $status_code = 200): JsonResponse
     {
-        dump($data);die;
-        $ret['message'] = $message;
-        #$ret['status'] = $status;
-        if (isset($data)) {
-            $ret['data'] = $data;
+        if (is_null($data)) {
+            return response()->json(compact('status_code', 'message'), $status_code);
+        } else {
+            // List With the page
+            if ($data instanceof AnonymousResourceCollection) {
+                $meta = [
+                    'total' => $data->total(),
+                    'per_page' => $data->perPage(),
+                    'current_page' => $data->currentPage()
+                ];
+                return response()->json(compact('data', 'meta', 'message', 'status_code'), $status_code);
+            } else {
+                return response()->json(compact('data', 'message', 'status_code'), $status_code);
+            }
         }
-        if (isset($data['meta'])){
-            $ret['meta'] = $data['meta'];
-        }
-        return response()->json($ret, $status);
     }
 }

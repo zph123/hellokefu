@@ -28,6 +28,20 @@ export function profile() {
 export function logout() {
     return request({
         url: '/logout',
-        method: 'post'
+        method: 'delete'
+    })
+}
+
+
+/**
+ * 客服注册
+ * @param data
+ * @returns {*}
+ */
+export function register(data) {
+    return request({
+        url: '/register',
+        method: 'post',
+        data
     })
 }

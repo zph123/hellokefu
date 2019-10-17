@@ -1,5 +1,6 @@
 <template>
     <div class="app-container">
+        <el-card class="box-card">
         <el-table
                 :data="tableData"
                 style="width: 100%">
@@ -62,30 +63,62 @@
                 </template>
             </el-table-column>
         </el-table>
+        <!--分页-->
+        <el-row style="float: right;margin-bottom: 10px;">
+            <el-col :span="12">
+                <el-pagination
+                        background
+                        :page-sizes="[1, 15, 20, 30, 40]"
+                        layout="total, sizes, prev, pager, next"
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :page-size="meta.size"
+                        :total="meta.total">
+                </el-pagination>
+            </el-col>
+        </el-row>
+        </el-card>
     </div>
 
 </template>
 <script>
+    import { indexVisit } from '../../api/visit'
     export default {
+        data() {
+            return {
+                tableData: [],
+                meta: {
+                    page: 1,
+                    size: 1,
+                    total: 0,
+                }
+            }
+        },
+        created() {
+            this.index()
+        },
         methods: {
             handleClick(row) {
                 console.log(row);
-            }
-        },
-
-        data() {
-            return {
-                tableData: [{
-                    region: '2016-05-03',
-                    ip: '王小虎',
-                    visit_number: '上海',
-                    company: '普陀区',
-                    lasted_at: '上海市普陀区金沙江路 1518 弄',
-                    created_at: 200333,
-                    mobile:111,
-                    email:'itbing@sina.cn',
-                    remark:'好人'
-                }]
+            },
+            index(){
+                indexVisit({'size': this.meta.size,'page': this.meta.page}).then(ret => {
+                    const { data, meta } = ret
+                    this.tableData = data
+                    this.meta.total = meta.total
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            handleSizeChange(val) {
+                this.meta.size = val;
+                this.index()
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                this.meta.page = val;
+                this.index()
             }
         }
     }

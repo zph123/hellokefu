@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Exceptions\ApiException;
+use App\Http\Requests\UserRequest;
+use App\Models\Application;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Webpatser\Uuid\Uuid;
 
 
 class AuthController extends ApiController
 {
 
     /**
-     * 管理员登录
+     * 客服登录
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -26,7 +31,7 @@ class AuthController extends ApiController
     }
 
     /**
-     * 获取管理员信息
+     * 获取客服信息
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -43,7 +48,7 @@ class AuthController extends ApiController
 
 
     /**
-     * 管理员退出
+     * 客服退出
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -52,5 +57,37 @@ class AuthController extends ApiController
         auth('api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * 客服管理员注册
+     *
+     * @param UserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function register(UserRequest $request)
+    {
+        try {
+            DB::transaction(function () use ($request){
+
+                $app = new Application();
+                $app->app_uuid = (string) Uuid::generate();
+                $app->save();
+
+                $user = new User();
+                $user->app_id   = $app->id;
+                $user->name     = '管理员';
+                $user->email    = $request->email;
+                $user->password = bcrypt($request->password);
+                $user->role     = User::ROLE_ADMIN;
+                $user->save();
+
+            },3);
+
+            return response()->json(['message' => 'Register successfully']);
+
+        } catch (ApiException $e) {
+            return $this->error($e->getMessage(),500);
+        }
     }
 }
