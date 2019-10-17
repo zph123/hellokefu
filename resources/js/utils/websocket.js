@@ -10,7 +10,6 @@ var websocket = {
     onmessage:function(ws,_this){
         ws.onmessage = function (evt) {
             var received_msg=evt.data
-            _this.sites.push({name: received_msg})
             var json_received_msg=JSON.parse(received_msg)
             var event=json_received_msg.event
             console.log(event)
