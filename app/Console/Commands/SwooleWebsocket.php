@@ -3,6 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Webpatser\Uuid\Uuid;
+use Illuminate\Support\Facades\Redis;
+use App\Services\WebsocketService;
 
 class SwooleWebsocket extends Command
 {
@@ -19,15 +23,18 @@ class SwooleWebsocket extends Command
      * @var string
      */
     protected $description = 'Command description';
+    public $server;
+    public $websocket;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(WebsocketService $websocket)
     {
         parent::__construct();
+        $this->websocket=$websocket;
     }
 
     /**
@@ -37,22 +44,35 @@ class SwooleWebsocket extends Command
      */
     public function handle()
     {
-        //
-        $server = new \Swoole\WebSocket\Server("0.0.0.0", 9501);
+        //dump($request1);
+        $this->server = new \Swoole\WebSocket\Server("0.0.0.0", 9501);
 
-        $server->on('open', function (\Swoole\WebSocket\Server $server, $request) {
-            echo "server: handshake success with fd{$request->fd}\n";
+        $this->server->on('open', function (\Swoole\WebSocket\Server $server, $request) {
+            echo "fd{$request->fd}进入房间\n";
         });
 
-        $server->on('message', function (\Swoole\WebSocket\Server $server, $frame) {
+        $this->server->on('message', function (\Swoole\WebSocket\Server $server, $frame) {
             echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
-            $server->push($frame->fd, $frame->data);
+            //根据data的event类型获取对应的事件
+            $data=json_decode($frame->data,true);
+            if (isset($data['event'])){
+                $event=$data['event'];
+                $this->websocket->$event($server,$frame);
+            }
+            //
         });
 
-        $server->on('close', function ($ser, $fd) {
+        $this->server->on('close', function ($ser, $fd) {
             echo "client {$fd} closed\n";
         });
 
-        $server->start();
+        $this->server->start();
     }
+
+    private function  user_connect($frame){
+        //获取参数app_id
+        $data=$frame->data;
+    }
+
+
 }
