@@ -38,6 +38,7 @@ class AuthController extends ApiController
     public function profile()
     {
         try {
+            dump(auth('api'));die;
             $admin = auth('api')->userOrFail();
             return response()->json($admin);
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {

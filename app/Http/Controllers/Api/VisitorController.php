@@ -12,9 +12,11 @@ class VisitorController extends ApiController
      * 访客列表
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->success(VisitorResource::collection(Visitor::orderBy('id',SORT_DESC)->paginate($this->perPage)));
+        return $this->success(VisitorResource::collection(Visitor::when(!empty($request->lasted_at),function ($query){
+            return $query->orderBy('lasted_at',SORT_DESC);
+        })->orderBy('id',SORT_DESC)->paginate($this->perPage)));
     }
 
     /**
