@@ -17,11 +17,11 @@
                     <span slot="title">主页</span>
                 </el-menu-item>
                 <el-menu-item index="3" route="conversation">
-                    <i class="el-icon-menu"></i>
+                    <i class="el-icon-service"></i>
                     <span slot="title">会话</span>
                 </el-menu-item>
                 <el-menu-item index="4" route="visit">
-                    <i class="el-icon-setting"></i>
+                    <i class="el-icon-tickets"></i>
                     <span slot="title">访客</span>
                 </el-menu-item>
                 <el-menu-item index="5" route="set">
