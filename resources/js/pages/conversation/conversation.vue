@@ -1,6 +1,11 @@
 <template>
     <div class="app-container">
 
+            <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
+                <li v-for="i in count" class="infinite-list-item">{{ i }}</li>
+            </ul>
+
+
             <h2>conversation</h2>
             <input type="text" v-model="message">
             <button @click="send">发送1</button>
@@ -21,6 +26,7 @@
         data() {
             return {
                 message: 'ceshi',
+                count: 0,
                 sites: [
                     {name: 'Runoob'},
                     {name: 'Google'},
@@ -47,6 +53,9 @@
                 // var json={'message':this.message,'from':'visitor','event':'create_visitor'}
                 // var data=JSON.stringify(json)
                 // Websocket.send(this.ws,data);
+            },
+            load () {
+                this.count += 2
             }
         }
 

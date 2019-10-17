@@ -14,15 +14,15 @@ class VisitorController extends ApiController
      */
     public function index(Request $request)
     {
-        return $this->success(VisitorResource::collection(Visitor::when(!empty($request->lasted_at),function ($query){
-            return $query->orderBy('lasted_at',SORT_DESC);
-        })->orderBy('id',SORT_DESC)->paginate($this->perPage)));
+        return $this->success(VisitorResource::collection(Visitor::when(!empty($request->lasted_at), function ($query) {
+            return $query->orderBy('lasted_at', SORT_DESC);
+        })->orderBy('id', SORT_DESC)->paginate($this->perPage)));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,8 +43,8 @@ class VisitorController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -55,7 +55,7 @@ class VisitorController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
