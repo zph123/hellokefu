@@ -23,9 +23,9 @@ trait ResultTrait
      * @param int $status
      * @return JsonResponse
      */
-    public function success(JsonResource $data = null, int $status_code = 200): JsonResponse
+    public function success(JsonResource $data = null, string $message = 'success', int $status_code = 200): JsonResponse
     {
-        return $this->result($data, 'success', $status_code);
+        return $this->result($data, $message, $status_code);
     }
 
     /**

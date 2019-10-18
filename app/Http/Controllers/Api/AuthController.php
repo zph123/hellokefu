@@ -24,6 +24,7 @@ class AuthController extends ApiController
         if (!$token = auth('api')->attempt($credentials)) {
             return $this->error('Unauthorized', 401);
         }
+
         return response()->json([
             'token' => $token,
             'expires' => auth('api')->factory()->getTTL() * 60,
@@ -57,7 +58,7 @@ class AuthController extends ApiController
     {
         auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->success(null,'Successfully logged out');
     }
 
     /**
@@ -85,7 +86,7 @@ class AuthController extends ApiController
 
             },3);
 
-            return response()->json(['message' => 'Register successfully']);
+            return $this->success(null,'Register successfully');
 
         } catch (ApiException $e) {
             return $this->error($e->getMessage(),500);

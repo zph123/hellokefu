@@ -14,7 +14,7 @@ class VisitorController extends ApiController
      */
     public function index(Request $request)
     {
-        return $this->success(VisitorResource::collection(Visitor::when(!empty($request->lasted_at), function ($query) {
+        return $this->success(VisitorResource::collection(Visitor::where('user_id',$this->user->id)->when(!empty($request->lasted_at), function ($query) {
             return $query->orderBy('lasted_at', SORT_DESC);
         })->orderBy('id', SORT_DESC)->paginate($this->perPage)));
     }
