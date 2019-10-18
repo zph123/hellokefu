@@ -25,6 +25,6 @@ class ChatController extends ApiController
      */
     public function index(ChatRequest $request)
     {
-        return $this->success(ChatResource::collection(Chat::where('visitor_id', $request->visitor_id)->orderBy('id', SORT_DESC)->paginate($this->perPage)));
+        return $this->success(ChatResource::collection(Chat::where('visitor_id', $request->vid)->orderBy('id', SORT_DESC)->paginate($this->perPage)));
     }
 }

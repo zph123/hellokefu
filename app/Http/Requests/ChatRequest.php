@@ -24,7 +24,7 @@ class ChatRequest extends ApiRequest
     public function rules()
     {
         return [
-            'visitor_id'    => 'required|uuid|exists:visitors,visitor_id'
+            'vid'    => 'required|uuid|exists:visitors,visitor_id'
         ];
     }
 }
