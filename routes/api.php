@@ -41,4 +41,7 @@ Route::group([
 
     // Visitor
     Route::apiResource('visitor','Api\VisitorController');
+
+    // Chat
+    Route::apiResource('chat','Api\ChatController');
 });

@@ -10,12 +10,21 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChatRequest;
+use App\Http\Resources\ChatResource;
+use App\Models\Chat;
 
 class ChatController extends ApiController
 {
 
-    public function index()
+    /**
+     * 聊天记录
+     *
+     * @param ChatRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(ChatRequest $request)
     {
-        return [];
+        return $this->success(ChatResource::collection(Chat::where('visitor_id', $request->visitor_id)->orderBy('id', SORT_DESC)->paginate($this->perPage)));
     }
 }
