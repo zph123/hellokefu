@@ -4,8 +4,8 @@
         <input type="text" v-model="message">
         <button v-on:click="send">发送1</button>
         <ul>
-            <li v-for="site in sites">
-                {{ site.name }}
+            <li v-for="item in messageList">
+                {{ item.content }}
             </li>
         </ul>
     </div>
@@ -18,10 +18,10 @@
             return {
                 ws:"",
                 message: 'chat',
-                sites: [
-                    {name: 'Runoob'},
-                    {name: 'Google'},
-                    {name: 'Taobao'}
+                messageList: [
+                    {content: 'Runoob'},
+                    {content: 'Google'},
+                    {content: 'Taobao'}
                 ],
                 user:{
                     user_id:''
@@ -53,13 +53,14 @@
         },
         methods: {
             visitorCreateSuccess(message) {
-                // console.log(message.data.visitor_id)
                 localStorage.setItem('visitor_id',message.data.visitor_id)
                 this.user={'user_id':message.data.user_id}
+                this.messageList.push({content: message})
             },
             visitorConnectSuccess(message) {
                 this.user={'user_id':message.data.user_id}
                 console.log(message)
+                this.messageList.push({content: message})
 
             },
             send() {

@@ -17,7 +17,9 @@ class WebsocketService
         //获取参数app_id
         $data=$frame->data;
         $arr=json_decode($data,true);
-        $app_id=$arr['app_id'];
+        $app_uuid=$arr['app_uuid'];
+        //根据$app_uuid找到$app_id（此处需要完善）
+        $app_id=$app_uuid;
         //根据规则生成user_id（此处需要完善）
         $user_id=1;
         //生成vistor_id
@@ -35,7 +37,7 @@ class WebsocketService
             ]
         );
         //redis
-        Redis::set($visitor_id, $frame->fd);
+        Redis::set("hello_".$visitor_id, $frame->fd);
         $message=[
             'from'=>$arr['from'],
             'to'=>$arr['to'],
@@ -62,6 +64,7 @@ class WebsocketService
             ]
         )->first();
         if($result){
+            Redis::set("hello_".$visitor_id, $frame->fd);
             $user_id=$result->user_id;
             $message=[
                 'from'=>$arr['from'],
