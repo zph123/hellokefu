@@ -1,5 +1,7 @@
 import router from '../router'
 import store from '../store'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { getToken,destroyToken } from './auth'
 import { profile } from '../api/auth'
 
@@ -7,6 +9,8 @@ import { profile } from '../api/auth'
 const noNeedLogin = ['/login','/chat','/register']
 
 router.beforeEach(async(to, from, next) => {
+
+    NProgress.start();
 
     // set page title
     document.title = to.meta.title
@@ -50,4 +54,5 @@ router.beforeEach(async(to, from, next) => {
 
 router.afterEach(() => {
     // finish progress bar
+    NProgress.done()
 })

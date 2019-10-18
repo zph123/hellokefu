@@ -1,6 +1,5 @@
 <template>
     <div class="app-container">
-
             <h2>conversation</h2>
             <input type="text" v-model="message">
             <button @click="send">发送1</button>
@@ -74,6 +73,7 @@
               console.log(index)
             },
             send() {
+
             },
             getConversation() {
                 indexVisit({'size': this.meta.size,'lasted_at': this.meta.lasted_at}).then(ret => {
@@ -85,6 +85,7 @@
                 }).catch(err => {
                     console.log(err)
                 })
+
             }
         }
 
