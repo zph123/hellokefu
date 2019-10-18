@@ -9,7 +9,6 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\ChatRequest;
 use App\Http\Resources\ChatResource;
 use App\Models\Chat;
