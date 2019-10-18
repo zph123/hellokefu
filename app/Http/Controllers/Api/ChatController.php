@@ -9,9 +9,11 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Exceptions\ApiException;
 use App\Http\Requests\ChatRequest;
 use App\Http\Resources\ChatResource;
 use App\Models\Chat;
+use App\Models\Visitor;
 
 class ChatController extends ApiController
 {
@@ -24,6 +26,21 @@ class ChatController extends ApiController
      */
     public function index(ChatRequest $request)
     {
-        return $this->success(ChatResource::collection(Chat::where('visitor_id', $request->vid)->orderBy('id', SORT_DESC)->paginate($this->perPage)));
+        try {
+            $visitorId = $request->input('visitor_id');
+            $appUuid = $request->input('app_uuid', null);
+            if (isset($appUuid)) {
+
+                $visitor = Visitor::where(['app_uuid' => $appUuid, 'visitor_id' => $visitorId])->first();
+                if (is_null($visitor)) {
+                    throw new ApiException('Not found visitor', 500);
+                }
+
+                return $this->success(ChatResource::collection(Chat::where(['visitor_id' => $visitorId, 'user_id' => $visitor->user_id])->orderBy('created_at', SORT_DESC)->paginate($this->perPage)));
+            }
+            return $this->success(ChatResource::collection(Chat::where('visitor_id', $visitorId)->orderBy('id', SORT_DESC)->paginate($this->perPage)));
+        } catch (ApiException $e) {
+            return $this->error($e->getMessage());
+        }
     }
 }

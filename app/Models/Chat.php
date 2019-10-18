@@ -10,7 +10,7 @@ class Chat extends Model
     /**
      * 来源客服
      */
-    const AGENT_SERVICER = 'servicer';
+    const AGENT_USER = 'user';
 
     /**
      * 来源访问者

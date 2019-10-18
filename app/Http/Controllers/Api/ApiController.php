@@ -10,13 +10,16 @@ class ApiController extends Controller
 {
     use ResultTrait;
 
-    protected $perPage;
+    protected $perPage = 15;
 
     protected $user;
 
     public function __construct(Request $request)
     {
-        $this->perPage = $request->size;
+        if (empty($request->size)) {
+            $this->perPage = $request->size;
+        }
+
 
         $this->user = auth('api')->user();
 
