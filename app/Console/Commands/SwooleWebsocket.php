@@ -63,16 +63,12 @@ class SwooleWebsocket extends Command
         });
 
         $this->server->on('close', function ($ser, $fd) {
-            echo "client {$fd} closed\n";
+            $user_visitor=Redis::get("hello:fd:".$fd);
+            Redis::del("hello:fd:".$fd);
+            Redis::del("hello:user_visitor:".$user_visitor);
         });
 
         $this->server->start();
     }
-
-    private function  user_connect($frame){
-        //获取参数app_id
-        $data=$frame->data;
-    }
-
 
 }

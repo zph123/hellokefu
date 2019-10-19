@@ -25,14 +25,16 @@
                 ],
                 user:{
                     user_id:''
-                }
+                },
+                titleSetInterval:0
             }
         },
         mounted() {
+            document.addEventListener("visibilitychange",this.onVisibilitychange);
             console.log(this.user)
             //获取app_id
-            let app_id = this.$route.query.app_id
-            if(app_id==undefined){
+            let app_uuid = this.$route.query.app_uuid
+            if(app_uuid==undefined){
                 alert('请选择您要沟通的app')
                 return false
             }
@@ -42,9 +44,9 @@
             //连接建立时触发create_visitor请求
             var visitor_id=localStorage.getItem('visitor_id');
             if(visitor_id){
-                var json={'app_id':app_id,'from':'visitor','to':'user','event':'visitorConnect','data':{'visitor_id':visitor_id}}
+                var json={'app_uuid':app_uuid,'from':'visitor','to':'user','event':'visitorConnect','data':{'visitor_id':visitor_id}}
             }else{
-                var json={'app_id':app_id,'from':'visitor','to':'visitor','event':'visitorCreate'}
+                var json={'app_uuid':app_uuid,'from':'visitor','to':'visitor','event':'visitorCreate'}
             }
             var message=JSON.stringify(json)
             Websocket.onopen(ws,message)
@@ -52,6 +54,13 @@
             Websocket.onmessage(ws,this)
         },
         methods: {
+            onVisibilitychange(){
+                if (!document.hidden) {   //处于当前页面
+                    clearInterval(this.titleSetInterval);
+                    document.title="咨询"
+                }
+
+            },
             visitorCreateSuccess(message) {
                 localStorage.setItem('visitor_id',message.data.visitor_id)
                 this.user={'user_id':message.data.user_id}
@@ -61,11 +70,28 @@
                 this.user={'user_id':message.data.user_id}
                 console.log(message)
                 this.messageList.push({content: message})
-
             },
             send() {
-                console.log("send")
+                let json={'app_uuid':'','visitor_id':localStorage.getItem('visitor_id'),'agent':'user','event':'userMessage', 'data':{'content':this.message}}
+                let message=JSON.stringify(json)
+                Websocket.send(this.ws,message)
+                this.messageList.push({content: this.message})
             },
+            messageReceived(message){
+                this.messageList.push({content: message})
+                document.title="未读消息-----"
+
+                this.titleSetInterval=setInterval(this.scrollTitle, 1000);
+                console.log(this.titleSetInterval)
+
+
+            },
+            scrollTitle() {
+                var titleInfo = document.title;
+                var firstInfo = titleInfo.charAt(0);
+                var lastInfo = titleInfo.substring(1, titleInfo.length);
+                document.title = lastInfo + firstInfo;
+            }
 
         }
     }

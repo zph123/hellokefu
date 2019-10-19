@@ -16,10 +16,9 @@ var websocket = {
             _this[event](json_received_msg)
         }
     },
-    // send:function (ws,data) {
-    //     console.log(123)
-    //     ws.send(data);
-    // },
+    send:function (ws,data) {
+        ws.send(data);
+    },
 
 }
 export default websocket
