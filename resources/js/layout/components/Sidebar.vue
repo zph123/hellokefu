@@ -62,7 +62,8 @@
         height: 50px;
         line-height: 50px;
         /*background: #FFF;*/
-        text-align: center;
+        /*text-align: center;*/
+        padding: 0 20px;
         overflow: hidden;
 
         & .sidebar-logo-link {
