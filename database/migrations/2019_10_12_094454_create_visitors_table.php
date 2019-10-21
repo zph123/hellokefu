@@ -17,7 +17,7 @@ class CreateVisitorsTable extends Migration
             $table->increments('id');
             $table->string('visitor_id',128)->nullable(false)->comment('访客编号 系统生成');
             $table->integer('user_id',false,true)->nullable(false)->comment('客服');
-            $table->integer('app_uuid',false,true)->nullable(false)->comment('应用UUID');
+            $table->char('app_uuid','36')->nullable(false)->comment('应用UUID');
             $table->integer('visit_number',false,true)->nullable(false)->default(0)->comment('会话次数');
             $table->integer('unread_number',false,true)->nullable(false)->default(0)->comment('未读消息数');
             $table->string('name',50)->nullable(false)->nullable(false)->default('')->comment('姓名');
