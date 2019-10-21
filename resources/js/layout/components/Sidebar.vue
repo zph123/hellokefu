@@ -1,5 +1,11 @@
 <template>
     <div :class="{'has-logo':false}">
+        <div class="sidebar-logo-container">
+            <a href="#/" class="sidebar-logo-link router-link-active">
+                <img src="/logo.png" class="sidebar-logo"/>
+                <h1 class="sidebar-title">哈啰客服</h1>
+            </a>
+        </div>
         <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
                     default-active="2"
@@ -7,9 +13,6 @@
                     class="el-menu-vertical-demo"
                     @open="handleOpen"
                     @close="handleClose"
-                    background-color="#545c64"
-                    text-color="#fff"
-                    active-text-color="#ffd04b"
                     :collapse-transition="false"
                     mode="vertical">
                 <el-menu-item index="1" route="/">
@@ -36,8 +39,6 @@
 
 
 <script>
-    import variables from '../../../sass/_variables.scss'
-
     export default {
         components: {},
         methods: {
@@ -53,3 +54,44 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .sidebar-logo-container {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        /*background: #FFF;*/
+        text-align: center;
+        overflow: hidden;
+
+        & .sidebar-logo-link {
+            height: 100%;
+            width: 100%;
+
+            & .sidebar-logo {
+                width: 38px;
+                height: 38px;
+                vertical-align: middle;
+                margin-right: 12px;
+            }
+
+            & .sidebar-title {
+                display: inline-block;
+                margin: 0;
+                color: #444444;
+                font-weight: 600;
+                line-height: 50px;
+                font-size: 14px;
+                font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+                vertical-align: middle;
+            }
+        }
+
+        &.collapse {
+            .sidebar-logo {
+                margin-right: 0px;
+            }
+        }
+    }
+</style>
