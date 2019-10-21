@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Webpatser\Uuid\Uuid;
 use App\Models\Visitor;
+use App\Models\Chat;
 
 class WebsocketService
 {
@@ -96,11 +97,13 @@ class WebsocketService
         $arr=json_decode($data,true);
         dump($arr);
         $user_id=auth('api')->setToken($arr['user_id'])->user()->id;
-        $insert_data['user_id']=$user_id;
-        $insert_data['visitor_id']=$arr['visitor_id'];
-        $insert_data['content']=$arr['data']['content'];
-        $insert_data['agent']=$arr['agent'];
-        DB::table('chats')->insert($insert_data);
+
+        Chat::insert([
+            'user_id'=>$user_id,
+            'visitor_id'=>$arr['visitor_id'],
+            'content'=>$arr['data']['content'],
+            'agent'=>Chat::AGENT_VISITOR,
+        ]);
         //转发给visitor
         $visitor_fd=Redis::get("hello:user_visitor:".$arr['visitor_id']);
         dump($visitor_fd);
@@ -112,7 +115,31 @@ class WebsocketService
         ];
         $visitor_fd=(int)$visitor_fd;
         $server->push($visitor_fd,  json_encode($message));
+    }
+    public function visitorMessage($server,$frame){
+        $data=$frame->data;
+        $arr=json_decode($data,true);
+        $result=Visitor::where(['app_uuid' => $arr['app_uuid'], 'visitor_id' => $arr['visitor_id']])->first();
+        dump($result->user_id);
 
+
+        Chat::insert([
+            'user_id'=>$result->user_id,
+            'visitor_id'=>$result->visitor_id,
+            'content'=>$arr['data']['content'],
+            'agent'=>Chat::AGENT_VISITOR,
+        ]);
+
+
+        $user_fd=Redis::get("hello:user_visitor:".$result->user_id);
+        $user_fd=(int)$user_fd;
+        $message=[
+            'event'=>'messageReceived',
+            'data'=>[
+                'content'=>$arr['data']['content'],
+            ]
+        ];
+        $server->push($user_fd,  json_encode($message));
 
     }
 }
