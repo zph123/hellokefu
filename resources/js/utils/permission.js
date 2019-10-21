@@ -6,7 +6,7 @@ import { getToken,destroyToken } from './auth'
 import { profile } from '../api/auth'
 
 
-const noNeedLogin = ['/login','/chat','/register']
+const noNeedLogin = ['/login','/chat','/register','/visit']
 
 router.beforeEach(async(to, from, next) => {
 

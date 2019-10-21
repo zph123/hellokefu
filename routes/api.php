@@ -23,6 +23,8 @@ Route::post('login', 'Api\AuthController@login')->name('admin.login');
 // Register
 Route::post('register', 'Api\AuthController@register')->name('admin.register');
 
+// 访客咨询
+Route::post('visit', 'Api\VisitorController@mine');
 
 // 需要登录的路由组
 Route::group([

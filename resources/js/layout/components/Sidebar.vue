@@ -20,7 +20,7 @@
                     <i class="el-icon-service"></i>
                     <span slot="title">会话</span>
                 </el-menu-item>
-                <el-menu-item index="4" route="visit">
+                <el-menu-item index="4" route="visitor">
                     <i class="el-icon-tickets"></i>
                     <span slot="title">访客</span>
                 </el-menu-item>

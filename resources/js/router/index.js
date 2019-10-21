@@ -44,10 +44,10 @@ const routes = [
             component: Vue.component('conversation', require('../pages/conversation/conversation.vue').default),
         },{
 
-            path: 'visit',
-            name: 'visit',
+            path: 'visitor',
+            name: 'visitor',
             meta: { title: '访客', icon: '' },
-            component: Vue.component('visit', require('../pages/visit/index.vue').default),
+            component: Vue.component('visitor', require('../pages/visitor/index.vue').default),
 
         },{
 
