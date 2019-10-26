@@ -16,6 +16,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
 import store from './store';
+import websocket from './websocket';
 import './utils/permission' // Auth
 import './icons'            // icons
 import '../sass/index.scss' // global css
@@ -27,5 +28,6 @@ const app = new Vue({
     el: '#app',
     router,
     store,
+    websocket,
     render: h => h(App),
 });
