@@ -109,7 +109,6 @@
                         this.loading = true
                         login(this.loginForm).then(response => {
                             const { token } = response
-                            setToken(token)
                             this.$store.commit('SET_TOKEN', token);
                             this.$router.push({ path: this.redirect || '/' })
                             this.loading = false

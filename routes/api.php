@@ -26,6 +26,9 @@ Route::post('register', 'Api\AuthController@register')->name('admin.register');
 // 访客咨询
 Route::post('visit', 'Api\VisitorController@mine');
 
+// Visitor Chat
+Route::get('visitorChat','Api\ChatController@visitorChat');
+
 // 需要登录的路由组
 Route::group([
     'middleware'    => [
@@ -44,6 +47,8 @@ Route::group([
     // Visitor
     Route::apiResource('visitor','Api\VisitorController');
 
-    // Chat
-    Route::apiResource('chat','Api\ChatController');
+    // Service Chat
+    Route::get('serviceChat','Api\ChatController@serviceChat');
+
+
 });

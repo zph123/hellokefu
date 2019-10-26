@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getToken,destroyToken } from '../utils/auth'
+import { getToken,setToken,destroyToken } from '../utils/auth'
 import { profile } from "../api/auth"
 
 Vue.use(Vuex);
@@ -20,6 +20,7 @@ const getters = {   // 实时监听state值的变化(最新状态)
 
 const mutations = {
     SET_TOKEN: (state, token) => {
+        setToken(token)
         state.token = token
     },
     SET_NAME: (state, name) => {

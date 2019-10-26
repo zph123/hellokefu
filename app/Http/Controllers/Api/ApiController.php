@@ -20,8 +20,9 @@ class ApiController extends Controller
             $this->perPage = $request->size;
         }
 
-
-        $this->user = auth('api')->user();
+        if (auth('api')->check()) {
+            $this->user = auth('api')->user();
+        }
 
         #$this->middleware('jwt.auth', ['except' => 'login']);
     }

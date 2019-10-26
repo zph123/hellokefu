@@ -43,6 +43,11 @@ const routes = [
             meta: { title: '会话', icon: '' },
             component: Vue.component('conversation', require('../pages/conversation/conversation.vue').default),
         },{
+            path: 'service',
+            name: 'service',
+            meta: { title: '聊天', icon: '' },
+            component: Vue.component('service', require('../pages/service/index.vue').default),
+        },{
 
             path: 'visitor',
             name: 'visitor',
