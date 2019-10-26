@@ -9,22 +9,14 @@
                     <div class="message" ref="viewBox" style="overflow:auto;height:300px">
                         <ul>
                             <li v-for="item in messageList">
-                                <p class="time"><span>16:09</span></p>
-                                <div>
-
+                                <p class="time"><span>16:09({{item.created_at}})</span></p>
+                                <div v-bind:class="{ self: 'visitor'==item.agent}">
                                     <img class="avatar" width="30" height="30" _v-b412eea0="" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png">
                                     <div class="text" _v-b412eea0="">
                                         {{ item.content }}
                                     </div>
                                 </div>
 
-                            </li>
-                            <li>
-                                <p class="time"><span>16:09</span></p>
-                                <div class="self">
-                                    <img class="avatar" width="30" height="30" _v-b412eea0="" src="http://coffcer.github.io/vue-chat/dist/images/2.png">
-                                    <div class="text" _v-b412eea0="">Hello，过Github Issue问我。</div>
-                                </div>
                             </li>
                         </ul>
                     </div>
@@ -50,15 +42,9 @@
             </el-col>
         </el-row>
 
-        <div id="talkbubble">sdfsdfdsf</div>
-        <h2>用户的id：{{user.name}}{{user.avatar}}</h2>
-        <input type="text" v-model="message">
-        <button v-on:click="sendMessage">发送1</button>
-        <ul>
-            <li v-for="item in messageList">
-                {{ item.content }}
-            </li>
-        </ul>
+<!--        <h2>用户的id：{{user.name}}{{user.avatar}}</h2>-->
+<!--        <input type="text" v-model="message">-->
+<!--        <button v-on:click="sendMessage">发送1</button>-->
     </div>
 </template>
 
@@ -148,7 +134,7 @@
             sendMessage() {
                 let message={'app_uuid':this.visitor.app_uuid,'visitor_id':this.visitor.visitor_id,'agent':'visitor','event':'visitorMessage', 'data':{'content':this.message}}
                 websocket.send(websocket.init,message)
-                this.messageList.push({content: this.message})
+                this.messageList.push({content: this.message,agent:'visitor'})
                 this.message=''
             },
             messageReceived(message){

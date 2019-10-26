@@ -141,7 +141,7 @@ class WebsocketService
             'user_id' => $user_id,
             'visitor_id' => $arr['visitor_id'],
             'content' => $arr['data']['content'],
-            'agent' => Chat::AGENT_VISITOR,
+            'agent' => Chat::AGENT_USER,
         ]);
         //转发给visitor
         $visitor_fd = Redis::get("hello:user_visitor:" . $arr['visitor_id']);
