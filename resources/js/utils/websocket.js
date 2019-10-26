@@ -5,6 +5,7 @@ var websocket = {
     onopen: function(ws,data){
         ws.onopen = function () {
             ws.send(data);
+            console.log(123)
         }
     },
     onmessage:function(ws,_this){
