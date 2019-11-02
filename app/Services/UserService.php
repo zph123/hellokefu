@@ -41,7 +41,7 @@ class UserService
      */
     static public function generateAvatar($num = null)
     {
-        $num = isset($num) ? $num : rand(1, 4);
+        $num = isset($num) ? $num : rand(2, 4);
         return '/images/user' . $num . '.png';
     }
 }
