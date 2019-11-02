@@ -6,6 +6,7 @@ use App\Exceptions\ApiException;
 use App\Http\Requests\UserRequest;
 use App\Models\Application;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 
@@ -77,6 +78,7 @@ class AuthController extends ApiController
 
                 $user = new User();
                 $user->app_id   = $app->id;
+                $user->avatar   = UserService::generateAvatar(1);
                 $user->name     = '管理员';
                 $user->email    = $request->email;
                 $user->password = bcrypt($request->password);

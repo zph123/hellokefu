@@ -17,7 +17,7 @@
             return {
                 meta: {
                     size: 5,
-                    lasted_at: 'DESC'
+                    updated_at: 'DESC'
                 },
                 active: '',
                 list: [],

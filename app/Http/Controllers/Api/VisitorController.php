@@ -19,8 +19,8 @@ class VisitorController extends ApiController
      */
     public function index(Request $request)
     {
-        return $this->success(VisitorResource::collection(Visitor::where('user_id', $this->user->id)->when(!empty($request->lasted_at), function ($query) {
-            return $query->orderBy('lasted_at', SORT_DESC);
+        return $this->success(VisitorResource::collection(Visitor::where('user_id', $this->user->id)->when(!empty($request->updated_at), function ($query) {
+            return $query->orderBy('updated_at', SORT_DESC);
         })->orderBy('id', SORT_DESC)->paginate($this->perPage)));
     }
 
@@ -93,11 +93,12 @@ class VisitorController extends ApiController
 
                 $visitor = Visitor::create([
                     'visitor_id' => (string)Uuid::generate(),
+                    'avatar'    => UserService::generateAvatar(),
                     'user_id' => $admin->id,
                     'app_uuid' => $appUuid,
                     'ip' => $request->getClientIp(),
                     'user_agent' => 'user_agent',
-                    'name'  => '访客 '.(Visitor::count() + 1)
+                    'name'  => '访客 '.(Visitor::where(['app_uuid'=>$app->app_uuid])->count() + 1)
                 ]);
             }
 

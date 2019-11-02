@@ -7,7 +7,7 @@
         <div class="right-menu">
             <el-dropdown class="avatar-container" trigger="click">
                 <div class="avatar-wrapper">
-                    <el-avatar src="http://laravel-admin.test/vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg"></el-avatar>
+                    <el-avatar src="/images/user1.png"></el-avatar>
                     <i class="el-icon-caret-bottom" />
                 </div>
                 <el-dropdown-menu slot="dropdown" class="user-dropdown">

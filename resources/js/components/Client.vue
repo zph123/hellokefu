@@ -1,7 +1,7 @@
 <template>
     <div class="chat-box">
         <div class="header">
-            <img class="avatar" width="30" height="30" src="http://laravel-admin.test/vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg" />
+            <img class="avatar" width="30" height="30" src="/images/user1.png" />
             <span>管理员</span>
         </div>
         <div class="message" id="message-box">
@@ -54,7 +54,7 @@
         },
         methods: {
             init () {
-                this.ws = new WebSocket("ws://127.0.0.1:9502");
+                this.ws = new WebSocket("ws://47.105.138.9:9502");
                 this.ws.onopen = this.webSocketOpen
                 this.ws.onmessage = this.webSocketMessage
                 this.ws.onerror = this.webSocketError

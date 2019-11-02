@@ -33,4 +33,15 @@ class UserService
             throw $e;
         }
     }
+
+    /**
+     * 生成随机头像-临时用
+     *
+     * @return string
+     */
+    static public function generateAvatar($num = null)
+    {
+        $num = isset($num) ? $num : rand(1, 4);
+        return '/images/user' . $num . '.png';
+    }
 }

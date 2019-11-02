@@ -6,16 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visitor extends Model
 {
-    protected $fillable = ['visitor_id', 'user_id', 'app_uuid', 'visit_number', 'unread_number', 'name', 'age', 'sex', 'company', 'qq', 'wechat', 'mobile', 'email', 'address', 'remark', 'region', 'ip', 'user_agent', 'lasted_message', 'lasted_at'];
+    protected $fillable = ['visitor_id', 'user_id', 'app_uuid', 'avatar', 'visit_number', 'unread_number', 'name', 'age', 'sex', 'company', 'qq', 'wechat', 'mobile', 'email', 'address', 'remark', 'region', 'ip', 'user_agent', 'lasted_message', 'lasted_at'];
 
 
-    protected $appends = ['avatar', 'lasted_at', 'lasted_message'];
-
-
-    public function getAvatarAttribute()
-    {
-        return 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png';
-    }
+    protected $appends = ['lasted_at', 'lasted_message'];
 
     public function getLastedAtAttribute()
     {
@@ -29,9 +23,10 @@ class Visitor extends Model
 
     /**
      * 关联客服
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 }

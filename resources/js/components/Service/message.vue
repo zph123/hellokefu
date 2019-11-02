@@ -59,7 +59,7 @@
         },
         methods: {
             init () {
-                this.ws = new WebSocket("ws://127.0.0.1:9502");
+                this.ws = new WebSocket("ws://47.105.138.9:9502");
                 console.log('connect...',this.ws)
                 this.ws.onopen = this.webSocketOpen
                 this.ws.onmessage = this.webSocketMessage
@@ -186,6 +186,7 @@
 
             height: 160px;
             border: solid 1px #ddd;
+            border-top: none;
 
             textarea {
                 padding: 10px;
