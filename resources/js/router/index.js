@@ -36,7 +36,7 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        redirect: {name: 'conversation'},
+        redirect: {name: 'service'},
         component: Layout,
         children: [{
             path: 'panel',

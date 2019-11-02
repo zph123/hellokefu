@@ -19,13 +19,13 @@
                     <i class="el-icon-menu"></i>
                     <span slot="title">主页</span>
                 </el-menu-item>
-                <el-menu-item index="2" route="conversation">
-                    <i class="el-icon-service"></i>
-                    <span slot="title">会话</span>
-                </el-menu-item>
+                <!--<el-menu-item index="2" route="conversation">-->
+                    <!--<i class="el-icon-service"></i>-->
+                    <!--<span slot="title">会话</span>-->
+                <!--</el-menu-item>-->
                 <el-menu-item index="3" route="service">
                     <i class="el-icon-service"></i>
-                    <span slot="title">聊天</span>
+                    <span slot="title">会话</span>
                 </el-menu-item>
                 <el-menu-item index="4" route="visitor">
                     <i class="el-icon-tickets"></i>
