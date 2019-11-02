@@ -24,9 +24,6 @@ const mutations = {
         state.token = token
     },
     SET_NAME: (state, name) => {
-        console.log('----')
-        console.log(name)
-        console.log('====')
         state.name = name
     },
     SET_AVATAR: (state, avatar) => {
@@ -66,6 +63,8 @@ const actions = {
         })
     }
 }
+
+
 
 const store = new Vuex.Store({
     state,

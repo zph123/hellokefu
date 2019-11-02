@@ -18,16 +18,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-// Login
+// 登录
 Route::post('login', 'Api\AuthController@login')->name('admin.login');
-// Register
+
+// 注册
 Route::post('register', 'Api\AuthController@register')->name('admin.register');
 
 // 访客咨询
 Route::post('visit', 'Api\VisitorController@mine');
 
-// Visitor Chat
-Route::get('visitorChat','Api\ChatController@visitorChat');
+// 访客聊天内容
+Route::get('visitor/messages','Api\ChatController@visitorMessage');
 
 // 需要登录的路由组
 Route::group([
@@ -37,18 +38,20 @@ Route::group([
 
 ],function (){
 
-    // Auth
+    // 退出
     Route::delete('logout', 'Api\AuthController@logout');
     Route::get('profile', 'Api\AuthController@profile');
 
-    // Admin
+    // 客服
     Route::apiResource('admin','Api\AdminController');
 
-    // Visitor
+    // 访客
     Route::apiResource('visitor','Api\VisitorController');
 
-    // Service Chat
-    Route::get('serviceChat','Api\ChatController@serviceChat');
+    // 客服聊天内容
+    Route::get('service/messages','Api\ChatController@serviceMessage');
 
 
+    // 应用
+    Route::get('application','Api\ApplicationController@show');
 });

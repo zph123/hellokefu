@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Chat from '../pages/chat/chat.vue'
+import Client from '../pages/client/index.vue'
 import Layout from '../layout/index.vue'
 import Login from '../pages/auth/login.vue'
 import Register from '../pages/auth/register.vue'
@@ -24,6 +25,12 @@ const routes = [
         path: '/chat',
         name: 'Chat',
         component: Chat,
+        meta: { title: '咨询', icon: '' }
+    },
+    {
+        path: '/client',
+        name: 'Client',
+        component: Client,
         meta: { title: '咨询', icon: '' }
     },
     {

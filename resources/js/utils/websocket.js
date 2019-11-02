@@ -1,6 +1,6 @@
 var websocket = {
     ws: function(){
-        return new WebSocket("ws://127.0.0.1:9501");
+        return new WebSocket("ws://127.0.0.1:9502");
     },
     onopen: function(ws,data){
         ws.onopen = function () {

@@ -16,7 +16,7 @@ class ApiController extends Controller
 
     public function __construct(Request $request)
     {
-        if (empty($request->size)) {
+        if (!empty($request->size)) {
             $this->perPage = $request->size;
         }
 

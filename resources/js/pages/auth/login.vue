@@ -8,7 +8,7 @@
 
             <el-form-item prop="email">
             <span class="svg-container">
-              <svg-icon icon-class="user" />
+              <i class="el-icon-user-solid"></i>
             </span>
             <el-input
                     ref="email"
@@ -23,7 +23,7 @@
 
             <el-form-item prop="password">
                 <span class="svg-container">
-                  <svg-icon icon-class="password" />
+                  <i class="el-icon-lock"></i>
                 </span>
                 <el-input
                         :key="passwordType"
@@ -37,8 +37,8 @@
                         @keyup.enter.native="handleLogin"
                 />
                 <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
+                    <i :class="passwordType === 'password' ? 'el-icon-view' : 'el-icon-sunny'" ></i>
+                </span>
             </el-form-item>
             <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
             <div class="tips">

@@ -18,6 +18,7 @@ class CreateVisitorsTable extends Migration
             $table->string('visitor_id',128)->nullable(false)->comment('访客编号 系统生成');
             $table->integer('user_id',false,true)->nullable(false)->comment('客服');
             $table->char('app_uuid','36')->nullable(false)->comment('应用UUID');
+            $table->string('avatar')->default('')->comment('头像');
             $table->integer('visit_number',false,true)->nullable(false)->default(0)->comment('会话次数');
             $table->integer('unread_number',false,true)->nullable(false)->default(0)->comment('未读消息数');
             $table->string('name',50)->nullable(false)->nullable(false)->default('')->comment('姓名');
@@ -33,8 +34,8 @@ class CreateVisitorsTable extends Migration
             $table->string('region',60)->nullable(false)->default('')->comment('地区');
             $table->string('ip',60)->nullable(false)->default('')->comment('IP');
             $table->string('user_agent',60)->nullable(false)->default('')->comment('终端信息');
-            $table->string('lasted_message',255)->nullable(false)->default('')->comment('最近消息');
-            $table->timestamp('lasted_at')->nullable()->comment('最近出现时间');
+//            $table->string('lasted_message',255)->nullable(false)->default('')->comment('最近消息');
+//            $table->timestamp('lasted_at')->nullable()->comment('最近出现时间');
             $table->index('visitor_id');
             $table->index('user_id');
             $table->index('app_uuid');

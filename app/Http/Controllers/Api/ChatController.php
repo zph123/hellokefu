@@ -24,10 +24,10 @@ class ChatController extends ApiController
      * @param ChatRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function visitorChat(ChatRequest $request)
+    public function visitorMessage(ChatRequest $request)
     {
         try {
-            $visitorId = $request->input('visitor_id');
+            $visitorId = $request->input('vid');
             $appUuid = $request->input('app_uuid', null);
             if (isset($appUuid)) {
 
@@ -36,7 +36,6 @@ class ChatController extends ApiController
                     throw new ApiException('Not found visitor', 500);
                 }
 
-                // 访客端聊天记录
                 $chatLog = Chat::where(['visitor_id' => $visitorId, 'user_id' => $visitor->user_id])->orderBy('created_at', SORT_DESC)->paginate($this->perPage);
                 return $this->success(ChatResource::collection($chatLog));
             }
@@ -52,12 +51,11 @@ class ChatController extends ApiController
      * @param ChatRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function serviceChat(ChatRequest $request)
+    public function serviceMessage(ChatRequest $request)
     {
         try {
-            $visitorId = $request->input('visitor_id');
-
-            return $this->success(ChatResource::collection(Chat::where(['visitor_id', $visitorId, 'user_id' => $this->user->id])->orderBy('id', SORT_DESC)->paginate($this->perPage)->reverse()));
+            $visitorId = $request->input('vid');
+            return $this->success(ChatResource::collection(Chat::where(['visitor_id'=>$visitorId, 'user_id' => $this->user->id])->orderBy('id', SORT_DESC)->paginate($this->perPage)));
 
         } catch (ApiException $e) {
             return $this->error($e->getMessage());

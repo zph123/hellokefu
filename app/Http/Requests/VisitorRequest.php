@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChatRequest extends ApiRequest
+class VisitorRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class ChatRequest extends ApiRequest
     public function rules()
     {
         return [
-            'vid'  => 'required|uuid|exists:visitors,visitor_id',
-            'app_uuid'    => 'uuid|exists:applications,app_uuid'
+            'app_uuid' => 'bail|required|uuid|exists:applications,app_uuid',
+            'vid' => 'uuid'
         ];
     }
 }

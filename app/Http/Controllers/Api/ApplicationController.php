@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Resources\ApplicationResource;
 use App\Models\Application;
 use Illuminate\Http\Request;
 
@@ -45,9 +46,10 @@ class ApplicationController extends ApiController
      * @param  \App\Models\Application  $application
      * @return \Illuminate\Http\Response
      */
-    public function show(Application $application)
+    public function show()
     {
-        //
+        $app = Application::where(['id'=>$this->user->app_id])->first();
+        return $this->success(new ApplicationResource($app));
     }
 
     /**

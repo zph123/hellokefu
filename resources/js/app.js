@@ -18,7 +18,6 @@ import router from './router'
 import store from './store';
 import websocket from './websocket';
 import './utils/permission' // Auth
-import './icons'            // icons
 import '../sass/index.scss' // global css
 
 
