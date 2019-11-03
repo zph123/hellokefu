@@ -104,7 +104,7 @@
         methods: {
             init(){
                 appInfo().then(ret => {
-                    this.link = 'http://hellokefu.com/#/client?app_uuid=' + ret.data.app_uuid
+                    this.link = 'http://chat.bingphp.com/#/client?app_uuid=' + ret.data.app_uuid
                 }).catch()
             },
             handleClose(done) {
